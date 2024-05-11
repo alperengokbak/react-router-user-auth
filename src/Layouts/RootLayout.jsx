@@ -2,12 +2,13 @@ import React from "react";
 
 // React Router
 import { NavLink, Outlet } from "react-router-dom";
+import BreadCrumbs from "../Components/BreadCrumbs";
 
 export default function RootLayout() {
   return (
     // container
     <div className="root-layout">
-      <header className="flex items-center bg-slate-300 min-h-20">
+      <header className="flex flex-col items-center bg-slate-300 min-h-20">
         <h1 className="container font-serif font-semibold underline underline-offset-8 text-4xl decoration-rose-400">
           My LiFe
         </h1>
@@ -26,7 +27,8 @@ export default function RootLayout() {
           </NavLink>
         </nav>
       </header>
-      <main className="container mt-10">
+      <main className="container mt-10 flex flex-col gap-4">
+        <BreadCrumbs />
         <Outlet />
       </main>
     </div>
