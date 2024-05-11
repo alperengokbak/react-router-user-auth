@@ -1,7 +1,7 @@
 import React from "react";
 
 // Axios API
-import instance from "../../api/axios";
+import instance from "../../Api/axios";
 
 // React Router
 import { Link, useLoaderData } from "react-router-dom";
@@ -25,6 +25,9 @@ export default function Careers() {
 const teamLoader = async () => {
   try {
     const response = await instance.get("/users");
+    if (!response.data) {
+      throw Error("Sorry, we couldn't find any team members.");
+    }
     return response.data;
   } catch (error) {
     console.error(error);

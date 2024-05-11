@@ -4,7 +4,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 
 // Axios API
-import instance from "../../api/axios";
+import instance from "../../Api/axios";
 
 export default function TeamDetails() {
   const user = useLoaderData();
@@ -26,9 +26,8 @@ const teamDetailsLoader = async ({ params }) => {
   try {
     const response = await instance.get(`/users/${params.id}`);
     if (!response.data) {
-      return { status: 404 };
+      throw Error("Sorry, we couldn't find the team member you are looking for.");
     }
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);

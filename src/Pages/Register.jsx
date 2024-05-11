@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
 // API
-import instance from "../api/axios.js";
+import instance from "../Api/axios.js";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
