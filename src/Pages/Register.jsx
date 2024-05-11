@@ -2,7 +2,7 @@
 import * as React from "react";
 
 // Imports React Router Dependencies
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 // Icons
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
@@ -53,7 +53,7 @@ export default function Register() {
     });
   };
   return (
-    <form className="register2" onSubmit={handleSubmit}>
+    <Form method="post" onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div className="sm:col-span-4">
           <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
@@ -202,6 +202,6 @@ export default function Register() {
           <div className="sm:col-end-7 col-span-2 flex justify-end text-lime-800">User Registered Successfully</div>
         )}
       </div>
-    </form>
+    </Form>
   );
 }

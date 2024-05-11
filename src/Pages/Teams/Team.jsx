@@ -4,10 +4,14 @@ import React from "react";
 import instance from "../../Api/axios";
 
 // React Router
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, Navigate, useLoaderData } from "react-router-dom";
 
 export default function Careers() {
   const careers = useLoaderData();
+  const [user, setUser] = React.useState("Mario");
+  if (!user) {
+    return <Navigate to="/" replace={true} />;
+  }
   return (
     <div>
       {careers.users.map((career) => (
@@ -18,6 +22,7 @@ export default function Careers() {
           <p>He/She is known as {career.username}.</p>
         </Link>
       ))}
+      <button onClick={() => setUser(null)}>Change User</button>
     </div>
   );
 }
