@@ -10,9 +10,8 @@ export default function TeamDetails() {
   const user = useLoaderData();
   const keys = Object.keys(user.user.roles);
   return (
-    <div className="career-details">
-      <h1 className="mb-4">Career Details</h1>
-      <p>Details for our team with id: {user.user._id}</p>
+    <div className="employer-details">
+      <h1 className="mb-4">Employer Details</h1>
       <p>Full Name: {user.user.full_name}</p>
       {keys.map((key) => (
         <p key={key}>Role: {key}</p>

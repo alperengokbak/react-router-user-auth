@@ -15,7 +15,7 @@ import TeamDetails, { teamDetailsLoader } from "./Pages/Teams/TeamDetail";
 // Layouts
 import RootLayout from "./Layouts/RootLayout";
 import HelpLayout from "./Layouts/HelpLayout";
-import CareerLayout from "./Layouts/CareerLayout";
+import TeamLayout from "./Layouts/TeamLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
       </Route>
-      <Route path="team" element={<CareerLayout />}>
+      <Route path="team" element={<TeamLayout />}>
         <Route index element={<Team />} loader={teamLoader}></Route>
         <Route path=":id" element={<TeamDetails />} loader={teamDetailsLoader} />
       </Route>

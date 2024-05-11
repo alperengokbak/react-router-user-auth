@@ -11,13 +11,11 @@ export default function Careers() {
   return (
     <div>
       {careers.users.map((career) => (
-        <Link className="block bg-slate-400 p-5 rounded-md my-2.5" to={career._id} key={career._id}>
+        <Link className="block bg-slate-200 p-5 rounded-md my-2.5 hover:bg-slate-300" to={career._id} key={career._id}>
           <p>
-            Contributor {career.full_name} is a {career.role} in {career.city}.
+            {career.full_name} is a {career.role} in {career.city}.
           </p>
-          <p>
-            Based in {career.city}, {career.country}, we are looking for a Software Engineer to join our team.
-          </p>
+          <p>He/She is known as {career.username}.</p>
         </Link>
       ))}
     </div>
