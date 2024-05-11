@@ -9,8 +9,8 @@ import Home from "./Pages/Home";
 import Faq from "./Pages/Help/Faq";
 import Contact from "./Pages/Help/Contact";
 import NotFound from "./Pages/NotFound";
-import Careers, { careersLoader } from "./Pages/Careers/Careers";
-import CareerDetails, { careerDetailsLoader } from "./Pages/Careers/CareerDetails";
+import Team, { teamLoader } from "./Pages/Teams/Team";
+import TeamDetails, { teamDetailsLoader } from "./Pages/Teams/TeamDetail";
 
 // Layouts
 import RootLayout from "./Layouts/RootLayout";
@@ -26,9 +26,9 @@ const router = createBrowserRouter(
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
       </Route>
-      <Route path="careers" element={<CareerLayout />}>
-        <Route index element={<Careers />} loader={careersLoader}></Route>
-        <Route path=":id" element={<CareerDetails />} loader={careerDetailsLoader} />
+      <Route path="team" element={<CareerLayout />}>
+        <Route index element={<Team />} loader={teamLoader}></Route>
+        <Route path=":id" element={<TeamDetails />} loader={teamDetailsLoader} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

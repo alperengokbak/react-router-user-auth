@@ -24,7 +24,7 @@ export default function Careers() {
   );
 }
 
-const careersLoader = async () => {
+const teamLoader = async () => {
   try {
     const response = await instance.get("/users");
     return response.data;
@@ -33,4 +33,4 @@ const careersLoader = async () => {
   }
 };
 
-export { careersLoader };
+export { teamLoader };
