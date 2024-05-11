@@ -8,6 +8,7 @@ import Register from "./Pages/Register";
 import Home from "./Pages/Home";
 import Faq from "./Pages/Help/Faq";
 import Contact from "./Pages/Help/Contact";
+import NotFound from "./Pages/NotFound";
 
 // Layouts
 import RootLayout from "./Layouts/RootLayout";
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

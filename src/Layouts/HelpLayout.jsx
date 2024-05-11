@@ -19,7 +19,9 @@ export default function HelpLayout() {
         </NavLink>
       </nav>
 
-      <Outlet />
+      <div className="mt-7">
+        <Outlet />
+      </div>
     </div>
   );
 }

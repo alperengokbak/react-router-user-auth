@@ -23,7 +23,7 @@ export default function RootLayout() {
           </NavLink>
         </nav>
       </header>
-      <main className="container">
+      <main className="container mt-10">
         <Outlet />
       </main>
     </div>
