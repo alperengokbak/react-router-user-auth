@@ -11,6 +11,7 @@ import Contact from "./Pages/Help/Contact";
 import NotFound from "./Pages/NotFound";
 import Team, { teamLoader } from "./Pages/Teams/Team";
 import TeamDetails, { teamDetailsLoader } from "./Pages/Teams/TeamDetail";
+import TeamError from "./Pages/Teams/TeamError";
 
 // Layouts
 import RootLayout from "./Layouts/RootLayout";
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
       </Route>
-      <Route path="team" element={<TeamLayout />}>
+      <Route path="team" element={<TeamLayout />} errorElement={<TeamError />}>
         <Route index element={<Team />} loader={teamLoader}></Route>
         <Route path=":id" element={<TeamDetails />} loader={teamDetailsLoader} />
       </Route>
