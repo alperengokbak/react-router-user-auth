@@ -55,11 +55,6 @@ export default function Register() {
   return (
     <form className="register2" onSubmit={handleSubmit}>
       <div className="border-gray-900/10 pb-12">
-        <h1 className="text-base font-semibold leading-7 text-gray-900 mt-3">Register</h1>
-        <p className="mt-1 text-sm leading-6 text-gray-600">
-          For us to get to know you better, please fill in the fields below.
-        </p>
-
         <div className="grid mt-7 grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-4">
             <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
