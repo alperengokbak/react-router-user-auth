@@ -4,7 +4,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 
 // Axios API
-import instance from "../../Api/axios";
+import instance from "../../api/axios";
 
 export default function TeamDetails() {
   const user = useLoaderData();

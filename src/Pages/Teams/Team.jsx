@@ -1,7 +1,7 @@
 import React from "react";
 
 // Axios API
-import instance from "../../Api/axios";
+import instance from "../../api/axios";
 
 // React Router
 import { Link, Navigate, useLoaderData } from "react-router-dom";
