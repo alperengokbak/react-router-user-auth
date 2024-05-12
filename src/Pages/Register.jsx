@@ -11,7 +11,7 @@ import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import instance from "../api/axios.js";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = "/register";
 
 export default function Register() {
@@ -28,32 +28,47 @@ export default function Register() {
     state: "",
     zip: "",
   });
-  const [successful, setSuccessful] = React.useState(false);
+  const [successfulMessage, setSuccessfulMessage] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!EMAIL_REGEX.test(values.email)) {
-      console.error("Invalid email address");
-      return;
-    }
-    if (!PWD_REGEX.test(values.password)) {
-      console.error("Invalid password");
-      return;
-    }
-    instance.post(REGISTER_URL, values).then((res) => {
-      if (res.status === 201) {
-        console.log("User Registered Successfully");
-        setSuccessful(true);
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      if (!EMAIL_REGEX.test(values.email)) {
+        setEmailErrorMessage("Invalid email address");
+        return;
+      }
+      if (!PWD_REGEX.test(values.password)) {
+        setPasswordErrorMessage("At least 8 characters, one uppercase, one lowercase, one number.");
+        return;
+      }
+      const response = await instance.post(REGISTER_URL, values);
+      if (response.status === 201) {
+        setSuccessfulMessage(response.data.message);
         setTimeout(() => {
           navigate("/");
-        }, 2000);
-      } else {
-        console.error("Failed to register user");
+        }, 3500);
       }
-    });
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 4000);
+      } else {
+        setErrorMessage("An error occurred. Please try again later.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 4000);
+      }
+      console.error(error);
+    }
   };
   return (
     <Form method="post" onSubmit={handleSubmit}>
+      {errorMessage ? <h2 className="flex justify-start text-md text-red-600 font-bold">{errorMessage}</h2> : <br />}
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div className="sm:col-span-4">
           <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
@@ -86,8 +101,11 @@ export default function Register() {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="password" className="flex text-sm font-medium leading-6 text-gray-900 items-center">
             Password
+            {passwordErrorMessage && (
+              <span className="text-red-600 text-xs font-semibold ml-3">{passwordErrorMessage}</span>
+            )}
           </label>
           <div className="mt-2">
             <input
@@ -103,6 +121,7 @@ export default function Register() {
         <div className="sm:col-span-4">
           <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
             Email address
+            {emailErrorMessage && <span className="text-red-600 text-xs font-semibold ml-2">{emailErrorMessage}</span>}
           </label>
           <div className="mt-2">
             <input
@@ -198,8 +217,8 @@ export default function Register() {
             Register
           </button>
         </div>
-        {successful && (
-          <div className="sm:col-end-7 col-span-2 flex justify-end text-lime-800">User Registered Successfully</div>
+        {successfulMessage && (
+          <div className="sm:col-end-7 col-span-2 flex justify-end text-lime-800">{successfulMessage}</div>
         )}
       </div>
     </Form>

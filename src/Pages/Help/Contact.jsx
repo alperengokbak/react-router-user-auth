@@ -4,6 +4,9 @@ import { Form } from "react-router-dom";
 // Import Instance of Axios
 import instance from "../../api/axios";
 
+// Icons
+import { solidWarningIcon, outlinedWarningIcon } from "../../assets/icons";
+
 const Tooltip = ({ message }) => {
   return (
     <div className="flex gap-2 text-md text-gray-500 font-medium hover:text-gray-800">
@@ -11,23 +14,6 @@ const Tooltip = ({ message }) => {
     </div>
   );
 };
-
-const warningIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="w-4 h-4"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-    />
-  </svg>
-);
 
 export default function Contact() {
   const [values, setValues] = React.useState({
@@ -39,6 +25,8 @@ export default function Contact() {
   const [errorMessage, setErrorMessage] = React.useState("");
   const [showFullNameTooltip, setShowFullNameTooltip] = React.useState(false);
   const [showEmailTooltip, setShowEmailTooltip] = React.useState(false);
+  const [hoveringFullName, setHoveringFullName] = React.useState(false);
+  const [hoveringEmail, setHoveringEmail] = React.useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +73,6 @@ export default function Contact() {
       console.error(error);
     }
   };
-  //! Register'da aynı işlemi yap unutma.
 
   return (
     <div className="contact-page">
@@ -95,10 +82,16 @@ export default function Contact() {
           Full Name
           <span
             className="tooltip-icon"
-            onMouseEnter={() => setShowFullNameTooltip(true)}
-            onMouseLeave={() => setShowFullNameTooltip(false)}
+            onMouseEnter={() => {
+              setShowFullNameTooltip(true);
+              setHoveringFullName(true);
+            }}
+            onMouseLeave={() => {
+              setShowFullNameTooltip(false);
+              setHoveringFullName(false);
+            }}
           >
-            {warningIcon}
+            {hoveringFullName ? solidWarningIcon : outlinedWarningIcon}
           </span>
           {showFullNameTooltip && (
             <Tooltip message="Please make sure to enter your full name registered in the system." />
@@ -116,10 +109,16 @@ export default function Contact() {
           Email
           <span
             className="tooltip-icon"
-            onMouseEnter={() => setShowEmailTooltip(true)}
-            onMouseLeave={() => setShowEmailTooltip(false)}
+            onMouseEnter={() => {
+              setShowEmailTooltip(true);
+              setHoveringEmail(true);
+            }}
+            onMouseLeave={() => {
+              setShowEmailTooltip(false);
+              setHoveringEmail(false);
+            }}
           >
-            {warningIcon}
+            {hoveringEmail ? solidWarningIcon : outlinedWarningIcon}
           </span>
           {showEmailTooltip && <Tooltip message="Please make sure to enter your email registered in the system." />}
         </label>
@@ -141,14 +140,12 @@ export default function Contact() {
           value={values.message}
           onChange={handleChange}
         ></textarea>
-        {successMessage ? (
-          <h2 className="flex justify-end text-md text-green-600 font-bold">{successMessage}</h2>
-        ) : (
-          <br />
-        )}
         <div className="flex justify-end mt-3">
           <button className="bg-black text-white px-4 py-2 rounded-md">Send</button>
         </div>
+        {successMessage && (
+          <h2 className="flex justify-end text-md text-green-600 font-bold mt-3">{successMessage}fdfdfdf</h2>
+        )}
       </Form>
     </div>
   );
