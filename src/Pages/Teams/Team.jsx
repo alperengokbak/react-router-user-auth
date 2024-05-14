@@ -16,7 +16,7 @@ export default function Careers() {
     <div className="flex flex-col">
       {careers.users.map((career) => (
         <Link
-          className="flex flex-row bg-slate-200 p-5 rounded-md my-2.5 hover:bg-slate-300"
+          className="flex flex-row bg-slate-100 p-5 rounded-lg my-2.5 hover:bg-slate-200"
           to={career._id}
           key={career._id}
         >
@@ -26,10 +26,13 @@ export default function Careers() {
             alt=""
           />
           <div className="flex flex-col gap-2.5 ml-5 justify-center">
-            <p>
+            <p className="font-serif text-lg">
               {career.full_name} is a {career.role} in {career.city}.
             </p>
-            <p>He/She is known as {career.username}.</p>
+            <p className="flex flex-row gap-1 font-serif text-lg">
+              He/She is known as{" "}
+              <p className="font-bold underline underline-offset-4 decoration-red-500">{career.username}</p>
+            </p>
           </div>
         </Link>
       ))}
