@@ -11,7 +11,6 @@ export default function TeamDetails() {
   const keys = Object.keys(user.user.roles);
   return (
     <div className="employer-details">
-      <h1 className="mb-4">Employer Details</h1>
       <p>Full Name: {user.user.full_name}</p>
       {keys.map((key) => (
         <p key={key}>Role: {key}</p>
