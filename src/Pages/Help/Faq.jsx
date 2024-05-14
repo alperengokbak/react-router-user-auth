@@ -3,10 +3,10 @@ import React from "react";
 export default function Faq() {
   return (
     <div className="faq">
-      <h1 className="text-2xl font-serif font-semibold underline underline-offset-8 decoration-rose-400">
+      <h1 className="text-2xl font-serif font-bold underline underline-offset-8 decoration-rose-400">
         Frequently Asked Questions
       </h1>
-      <p className="leading-9">Got questions about this website? We've got answers! If you don't see</p>
+      <p className="leading-9 font-bold">Got questions about this website? We've got answers! If you don't see</p>
 
       <div className="mt-5">
         <h4 className="text-lg font-serif font-semibold">What is the purpose of this website?</h4>
