@@ -6,17 +6,23 @@ import { useLoaderData } from "react-router-dom";
 // Axios API
 import instance from "../../api/axios";
 
+// Avatar
+import { avatar } from "../../Components/avatar";
+
 export default function TeamDetails() {
   const user = useLoaderData();
   const keys = Object.keys(user.user.roles);
   return (
-    <div className="employer-details">
-      <p>Full Name: {user.user.full_name}</p>
-      {keys.map((key) => (
-        <p key={key}>Role: {key}</p>
-      ))}
-      <p>City: {user.user.city}</p>
-      <p>Country: {user.user.country}</p>
+    <div className="employer-details flex flex-row font-serif text-lg p-5 items-center">
+      {avatar}
+      <div className="flex flex-col ml-5">
+        <p>Full Name: {user.user.full_name}</p>
+        {keys.map((key) => (
+          <p key={key}>Role: {key}</p>
+        ))}
+        <p>City: {user.user.city}</p>
+        <p>Country: {user.user.country}</p>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Form } from "react-router-dom";
 import instance from "../../api/axios";
 
 // Icons
-import { solidWarningIcon, outlinedWarningIcon } from "../../assets/icons";
+import { solidWarningIcon, outlinedWarningIcon } from "../../Components/icons";
 
 const Tooltip = ({ message }) => {
   return (
