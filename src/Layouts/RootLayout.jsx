@@ -12,17 +12,17 @@ export default function RootLayout() {
         <h1 className="container font-serif font-semibold underline underline-offset-8 text-4xl decoration-rose-400">
           My LiFe
         </h1>
-        <nav className="flex justify-end gap-3 container">
-          <NavLink className="hover:bg-slate-100 p-2 rounded-full font-bold focus:bg-slate-400" to="/">
+        <nav className="flex justify-end gap-3 container font-bold">
+          <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/">
             Home
           </NavLink>
-          <NavLink className="hover:bg-slate-100 p-2 rounded-full font-bold focus:bg-slate-400" to="/register">
+          <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/register">
             Register
           </NavLink>
-          <NavLink className="hover:bg-slate-100 p-2 rounded-full font-bold focus:bg-slate-400" to="/team">
+          <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/team">
             Team
           </NavLink>
-          <NavLink className="hover:bg-slate-100 p-2 rounded-full font-bold focus:bg-slate-400" to="/help">
+          <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/help">
             Help
           </NavLink>
         </nav>
