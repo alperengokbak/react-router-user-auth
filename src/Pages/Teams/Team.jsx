@@ -30,7 +30,7 @@ export default function Careers() {
             </p>
             <p className="flex flex-row gap-1">
               He/She is known as{" "}
-              <p className="font-bold underline underline-offset-4 decoration-red-500">{career.username}</p>
+              <span className="font-bold underline underline-offset-4 decoration-red-500">{career.username}</span>
             </p>
           </div>
         </Link>
