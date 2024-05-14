@@ -16,13 +16,13 @@ export default function BreadCrumbs() {
           <Link to={currentLink} className="text-blue-500 font-bold hover:underline ml-2">
             {crumb}
           </Link>
-          <span className="mx-2">/</span>
+          <span className="mx-1">/</span>
         </div>
       );
     });
 
   return (
-    <div className="breadcrumbs flex flex-row text-lg ">
+    <div className="breadcrumbs flex flex-row">
       {currentLink ? "BreadCrumbs: " : ""} {crumbs}
     </div>
   );

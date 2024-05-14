@@ -7,8 +7,8 @@ import BreadCrumbs from "../Components/BreadCrumbs";
 export default function RootLayout() {
   return (
     // container
-    <div className="root-layout">
-      <header className="flex items-center bg-slate-300 min-h-20">
+    <div className="root-layout min-h-min min-w-min">
+      <header className="flex items-center bg-slate-300 min-h-28 min-w-min">
         <h1 className="container font-serif font-semibold underline underline-offset-8 text-4xl decoration-rose-400">
           My LiFe
         </h1>
