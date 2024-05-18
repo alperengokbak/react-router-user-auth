@@ -8,7 +8,7 @@ export default function RootLayout() {
   return (
     // container
     <div className="root-layout min-h-min min-w-min">
-      <header className="flex items-center bg-slate-300 min-h-28 min-w-min">
+      <header className="flex items-center bg-slate-300 min-h-28 min-w-min sticky top-0 opacity-90 overflow-hidden">
         <h1 className="container font-serif font-semibold underline underline-offset-8 text-4xl decoration-rose-400">
           My LiFe
         </h1>

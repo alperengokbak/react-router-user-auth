@@ -4,9 +4,6 @@ import * as React from "react";
 // Imports React Router Dependencies
 import { Form, useNavigate } from "react-router-dom";
 
-// Icons
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-
 // API
 import instance from "../api/axios.js";
 
@@ -14,8 +11,13 @@ const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = "/register";
 
+//TODO: Add file upload structure.
+//TODO: Configure user authentication in the frontend.
+
 export default function Register() {
   const navigate = useNavigate();
+  const [cvFileName, setCvFileName] = React.useState("");
+  const [clFileName, setClFileName] = React.useState("");
 
   const [values, setValues] = React.useState({
     full_name: "",
@@ -28,10 +30,10 @@ export default function Register() {
     state: "",
     zip: "",
   });
-  const [successfulMessage, setSuccessfulMessage] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
+  const [processing, setProcessing] = React.useState(true);
 
   const handleSubmit = async (event) => {
     try {
@@ -46,7 +48,7 @@ export default function Register() {
       }
       const response = await instance.post(REGISTER_URL, values);
       if (response.status === 201) {
-        setSuccessfulMessage(response.data.message);
+        setProcessing(false);
         setTimeout(() => {
           navigate("/");
         }, 3500);
@@ -66,11 +68,25 @@ export default function Register() {
       console.error(error);
     }
   };
+
+  const handleCVChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setCvFileName(file.name);
+    }
+  };
+
+  const handleCoverLetterChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setClFileName(file.name);
+    }
+  };
   return (
     <Form method="post" onSubmit={handleSubmit}>
       {errorMessage ? <h2 className="flex justify-start text-md text-red-600 font-bold">{errorMessage}</h2> : <br />}
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div className="sm:col-span-4">
+        <div className="sm:col-span-3 ">
           <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
             Fullname
           </label>
@@ -101,6 +117,22 @@ export default function Register() {
         </div>
 
         <div className="sm:col-span-3">
+          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+            Email address
+            {emailErrorMessage && <span className="text-red-600 text-xs font-semibold ml-2">{emailErrorMessage}</span>}
+          </label>
+          <div className="mt-2">
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onChange={(event) => setValues({ ...values, email: event.target.value })}
+            />
+          </div>
+        </div>
+
+        <div className="sm:col-span-3">
           <label htmlFor="password" className="flex text-sm font-medium leading-6 text-gray-900 items-center">
             Password
             {passwordErrorMessage && (
@@ -118,23 +150,7 @@ export default function Register() {
           </div>
         </div>
 
-        <div className="sm:col-span-4">
-          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-            Email address
-            {emailErrorMessage && <span className="text-red-600 text-xs font-semibold ml-2">{emailErrorMessage}</span>}
-          </label>
-          <div className="mt-2">
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              onChange={(event) => setValues({ ...values, email: event.target.value })}
-            />
-          </div>
-        </div>
-
-        <div className="sm:col-span-3">
+        <div className="sm:col-span-6">
           <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
             Country
           </label>
@@ -151,6 +167,42 @@ export default function Register() {
               <option value="Mexico">Mexico</option>
             </select>
           </div>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label
+            htmlFor="file-upload"
+            className="flex flex-col p-3 items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-500"
+          >
+            <div className="flex flex-col items-center justify-center pt-4 pb-4">
+              <p className="mb-2 text-sm text-gray-500 font-bold">Upload Your CV</p>
+              <p className="mb-1 text-xs text-gray-500">Click to upload or drag and drop</p>
+              <p className="text-xs text-gray-500">Only accept .pdf, .doc, .docx</p>
+              {cvFileName && <p className="mt-2 text-sm text-gray-600 font-bold">{cvFileName}</p>}
+            </div>
+            <input id="file-upload" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleCVChange} />
+          </label>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label
+            htmlFor="file-upload2"
+            className="flex flex-col p-3 items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-500"
+          >
+            <div className="flex flex-col items-center justify-center pt-4 pb-4">
+              <p className="mb-2 text-sm text-gray-500 font-bold">Upload Your Cover letter</p>
+              <p className="mb-1 text-xs text-gray-500">Click to upload or drag and drop</p>
+              <p className="text-xs text-gray-500">Only accept .pdf, .doc, .docx</p>
+              {clFileName && <p className="mt-2 text-sm text-gray-600 font-bold">{clFileName}</p>}
+            </div>
+            <input
+              id="file-upload2"
+              type="file"
+              className="hidden"
+              accept=".pdf,.doc,.docx"
+              onChange={handleCoverLetterChange}
+            />
+          </label>
         </div>
 
         <div className="col-span-full">
@@ -212,14 +264,22 @@ export default function Register() {
             />
           </div>
         </div>
+
         <div className="sm:col-end-7 col-span-2 flex justify-end">
-          <button className="hover:bg-slate-600 hover:rounded-full p-1 bg-zinc-950 text-white rounded-full w-full">
-            Register
-          </button>
+          {processing ? (
+            <button className="hover:bg-slate-600 hover:rounded-full p-1 bg-zinc-950 text-white rounded-full w-full">
+              Register
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="hover:bg-slate-600 hover:rounded-full p-1 bg-zinc-950 text-white rounded-full w-full"
+              disabled
+            >
+              Processing...
+            </button>
+          )}
         </div>
-        {successfulMessage && (
-          <div className="sm:col-end-7 col-span-2 flex justify-end text-lime-800">{successfulMessage}</div>
-        )}
       </div>
     </Form>
   );

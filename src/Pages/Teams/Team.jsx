@@ -19,7 +19,7 @@ export default function Careers() {
     <div className="flex flex-col">
       {careers.users.map((career) => (
         <Link
-          className="flex flex-row bg-slate-100 p-5 rounded-lg my-2.5 hover:bg-slate-200 font-serif text-lg"
+          className="flex flex-row even:bg-gray-300 odd:bg-slate-100 p-5 rounded-lg my-2.5 hover:bg-slate-200 font-serif text-lg"
           to={career._id}
           key={career._id}
         >
