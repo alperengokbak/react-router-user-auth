@@ -11,7 +11,6 @@ const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = "/register";
 
-//TODO: Add file upload structure.
 //TODO: Configure user authentication in the frontend.
 
 export default function Register() {
@@ -50,7 +49,7 @@ export default function Register() {
       if (response.status === 201) {
         setProcessing(false);
         setTimeout(() => {
-          navigate("/");
+          navigate("/signin");
         }, 3500);
       }
     } catch (error) {
@@ -169,10 +168,10 @@ export default function Register() {
           </div>
         </div>
 
-        <div className="sm:col-span-3">
+        <div className="sm:col-span-2 sm:col-start-2">
           <label
             htmlFor="file-upload"
-            className="flex flex-col p-3 items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-500"
+            className="flex flex-col p-3 sm:max-w-xs items-center justify-center border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-indigo-600"
           >
             <div className="flex flex-col items-center justify-center pt-4 pb-4">
               <p className="mb-2 text-sm text-gray-500 font-bold">Upload Your CV</p>
@@ -187,7 +186,7 @@ export default function Register() {
         <div className="sm:col-span-3">
           <label
             htmlFor="file-upload2"
-            className="flex flex-col p-3 items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-500"
+            className="flex flex-col sm:max-w-xs p-3 items-center justify-center w-full h-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-indigo-600"
           >
             <div className="flex flex-col items-center justify-center pt-4 pb-4">
               <p className="mb-2 text-sm text-gray-500 font-bold">Upload Your Cover letter</p>
@@ -267,15 +266,9 @@ export default function Register() {
 
         <div className="sm:col-end-7 col-span-2 flex justify-end">
           {processing ? (
-            <button className="hover:bg-slate-600 hover:rounded-full p-1 bg-zinc-950 text-white rounded-full w-full">
-              Register
-            </button>
+            <button className="hover:bg-slate-600 rounded-md p-1 bg-zinc-950 text-white w-full">Register</button>
           ) : (
-            <button
-              type="button"
-              className="hover:bg-slate-600 hover:rounded-full p-1 bg-zinc-950 text-white rounded-full w-full"
-              disabled
-            >
+            <button type="button" className="hover:bg-slate-600 rounded-md p-1 bg-zinc-950 text-white w-full" disabled>
               Processing...
             </button>
           )}

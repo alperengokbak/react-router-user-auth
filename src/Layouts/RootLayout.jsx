@@ -16,6 +16,9 @@ export default function RootLayout() {
           <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/">
             Home
           </NavLink>
+          <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to={"/signin"}>
+            Sign In
+          </NavLink>
           <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/register">
             Register
           </NavLink>
