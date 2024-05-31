@@ -1,14 +1,10 @@
 // Imports React Dependencies
 import * as React from "react";
 
-// Imports AuthProvider Context
-import AuthContext from "../Context/AuthProvider.jsx";
-
 // API
 import instance from "../api/axios.js";
 
 export default function Example() {
-  const { setUser } = React.useContext(AuthContext);
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
