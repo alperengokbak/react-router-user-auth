@@ -17,9 +17,6 @@ export default function RootLayout() {
           My LiFe
         </h1>
         <nav className="flex justify-end gap-3 container font-bold">
-          <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to="/">
-            Home
-          </NavLink>
           <NavLink className="hover:bg-slate-100 p-2 rounded-full focus:bg-slate-400" to={"/signin"}>
             Sign In
           </NavLink>
